@@ -3,7 +3,7 @@
 [![NPM version](https://img.shields.io/npm/v/imagemin-mozjpeg-full.svg)](https://www.npmjs.org/package/imagemin-mozjpeg-full)
 [![Travis Build Status](https://img.shields.io/travis/itgalaxy/imagemin-mozjpeg-full/master.svg?label=build)](https://travis-ci.org/itgalaxy/imagemin-mozjpeg-full)
 [![dependencies Status](https://david-dm.org/itgalaxy/imagemin-mozjpeg-full/status.svg)](https://david-dm.org/itgalaxy/imagemin-mozjpeg-full)
-[![devDependencies Status](https://david-dm.org/itgalaxy/imagemin-mozjpeg-full/dev-status.svg)](https://david-dm.org/itgalaxy/imagemin-mozjpeg-full?type=dev)
+[![devDependencies Status](https://david-dm.org/itgalaxy/imagemin-mozjpeg-full/dev-status.svg)](https://david-dm.org/itgalaxy/imagemin-mozjpeg-full?type=dev) [![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/imagemin-mozjpeg-full.svg)](https://greenkeeper.io/)
 
 Imagemin plugin for all mozjpeg binaries (cjpeg and jpegtran).
 
