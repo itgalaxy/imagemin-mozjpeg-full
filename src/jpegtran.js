@@ -27,6 +27,8 @@ module.exports = opts => buf => {
 
   if (options.arithmetic) {
     args.push("-arithmetic");
+  } else {
+    args.push("-optimize");
   }
 
   args.push("-outfile", execBuffer.output, execBuffer.input);
