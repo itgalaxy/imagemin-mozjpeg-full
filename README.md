@@ -235,6 +235,10 @@ Type: `buffer`
 
 Buffer to optimize.
 
-## [Changelog](CHANGELOG.md)
+## Changelog
 
-## [License](LICENSE)
+[Changelog](./CHANGELOG.md)
+
+## License
+
+[MIT](./LICENSE)
