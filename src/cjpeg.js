@@ -4,7 +4,8 @@ const execa = require("execa");
 const isJpg = require("is-jpg");
 const mozjpegBinaries = require("mozjpeg-binaries");
 
-module.exports = opts => buffer => {
+// eslint-disable-next-line complexity
+module.exports = opts => async buffer => {
   const options = Object.assign(
     {
       overshoot: true,
@@ -15,7 +16,7 @@ module.exports = opts => buffer => {
   );
 
   if (!Buffer.isBuffer(buffer)) {
-    return Promise.reject(new TypeError("Expected a buffer"));
+    throw new TypeError("Expected a buffer");
   }
 
   if (!isJpg(buffer)) {
@@ -92,9 +93,22 @@ module.exports = opts => buffer => {
     args.push("-sample", options.sample.join(","));
   }
 
-  return execa.stdout(mozjpegBinaries.cjpeg, args, {
-    encoding: null,
-    input: buffer,
-    maxBuffer: Infinity
-  });
+  // eslint-disable-next-line init-declarations
+  let stdout;
+
+  try {
+    ({ stdout } = await execa(mozjpegBinaries.cjpeg, args, {
+      encoding: null,
+      input: buffer,
+      maxBuffer: Infinity
+    }));
+  } catch (error) {
+    if (error.stderr) {
+      error.message += `\n${error.stderr.toString()}`;
+    }
+
+    throw error;
+  }
+
+  return stdout;
 };

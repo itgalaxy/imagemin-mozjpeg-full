@@ -4,11 +4,11 @@ const execBuffer = require("exec-buffer");
 const isJpg = require("is-jpg");
 const mozjpegBinaries = require("mozjpeg-binaries");
 
-module.exports = opts => buf => {
+module.exports = opts => async buf => {
   const options = Object.assign({}, opts);
 
   if (!Buffer.isBuffer(buf)) {
-    return Promise.reject(new TypeError("Expected a buffer"));
+    throw new TypeError("Expected a buffer");
   }
 
   if (!isJpg(buf)) {
@@ -33,13 +33,20 @@ module.exports = opts => buf => {
 
   args.push("-outfile", execBuffer.output, execBuffer.input);
 
-  return execBuffer({
-    args,
-    bin: mozjpegBinaries.jpegtran,
-    input: buf
-  }).catch(error => {
+  // eslint-disable-next-line init-declarations
+  let buffer;
+
+  try {
+    buffer = await execBuffer({
+      args,
+      bin: mozjpegBinaries.jpegtran,
+      input: buf
+    });
+  } catch (error) {
     error.message = error.stderr || error.message;
 
     throw error;
-  });
+  }
+
+  return buffer;
 };
